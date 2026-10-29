@@ -1,6 +1,6 @@
 # Allen Christopher Raj D - Personal Portfolio
 
-A GTA San Andreas pause-menu-styled portfolio for **Allen Christopher Raj D**, Aspiring AI Security Engineer & Ethical Hacker.
+A portfolio for **Allen Christopher Raj D**, Aspiring AI Security Engineer & Ethical Hacker.
 
 ## 🚀 Features
 - **Authentic GTA San Andreas Pause Menu Aesthetics**:
