@@ -1,0 +1,1129 @@
+/* ==========================================================================
+   GTA SAN ANDREAS AUTHENTIC PAUSE MENU PORTFOLIO
+   Typography:
+   - "Diploma" / "Beckett": Name branding (San Andreas logo style)
+   - "Pricedown": Titles & Pause Menu items (GTA franchise style)
+   - "Jost" / "Futura": Subtitles, tags, and interface labels
+   - "Space Grotesk": Professional, readable body text
+   Palette:
+   - Clean pitch-black background & flat muted sage-green panels
+   - Crisp edges without dark vignettes or shading
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+/* Authentic Local Fonts */
+@font-face {
+  font-family: 'Pricedown';
+  src: url('fonts/pricedown.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Diploma';
+  src: url('fonts/diploma.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Beckett';
+  src: url('fonts/beckett.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Flat San Andreas Palette */
+  --bg-main: #0c0e0c;
+  --bg-panel: #141a13;
+  --bg-panel-inner: #1a2319;
+
+  --sage-muted: #273725;
+  --sage-border: #3b5238;
+  --sage-border-active: #5c7f57;
+  --sage-highlight: #7ea878;
+
+  --gta-yellow: #f8c200;
+  --gta-gold: #e2af00;
+  --gta-white: #ffffff;
+  --gta-offwhite: #e8ebe6;
+  --gta-gray: #a6b2a3;
+  --gta-dim: #5c685a;
+  --gta-green: #3cd457;
+
+  /* Typography */
+  --font-logo: 'Diploma', 'Beckett', serif;
+  --font-pricedown: 'Pricedown', Impact, sans-serif;
+  --font-interface: 'Jost', 'Futura', -apple-system, sans-serif;
+  --font-body: 'Space Grotesk', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --header-height: 54px;
+  --footer-height: 46px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-main);
+  color: var(--gta-white);
+  font-family: var(--font-body);
+  user-select: none;
+}
+
+/* ==========================================================================
+   START / LOADING SCREEN (AUTO-PROGRESS INTO MENU)
+   ========================================================================== */
+#splash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #090c09;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 24px;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+#splash-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.splash-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 680px;
+  width: 90%;
+}
+
+.splash-name-diploma {
+  font-family: var(--font-logo);
+  font-size: 4.2rem;
+  color: var(--gta-white);
+  text-shadow: 3px 3px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+.splash-subtitle {
+  font-family: var(--font-interface);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: var(--gta-yellow);
+  text-transform: uppercase;
+  border-top: 2px solid var(--sage-border);
+  border-bottom: 2px solid var(--sage-border);
+  padding: 8px 24px;
+  margin-bottom: 36px;
+}
+
+/* Auto-loading progress bar */
+.splash-loader-wrap {
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.splash-loader-bar {
+  width: 100%;
+  height: 10px;
+  background: #111711;
+  border: 1px solid var(--sage-border);
+  overflow: hidden;
+}
+
+.splash-loader-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--sage-border-active), var(--gta-yellow));
+  transition: width 0.08s linear;
+}
+
+.splash-loader-text {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-interface);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--gta-gray);
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   MAIN MENU CONTAINER
+   ========================================================================== */
+#pause-menu-app {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background: var(--bg-main);
+}
+
+/* ==========================================================================
+   TOP BAR (CLEAN & PROFESSIONAL)
+   ========================================================================== */
+.menu-top-bar {
+  height: var(--header-height);
+  background: #10150f;
+  border-bottom: 2px solid var(--sage-border);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 32px;
+  position: relative;
+  z-index: 10;
+}
+
+.top-bar-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+}
+
+.top-bar-name {
+  font-family: var(--font-interface);
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: var(--gta-white);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* ==========================================================================
+   WORKSPACE: LEFT MENU & RIGHT CONTENT
+   ========================================================================== */
+.menu-main-body {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  padding: 18px 32px;
+  gap: 26px;
+  min-height: 0;
+}
+
+/* ==========================================================================
+   LEFT PANEL: THE VERTICAL PAUSE MENU
+   ========================================================================== */
+.left-menu-panel {
+  flex: 0 0 360px;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-panel);
+  border: 2px solid var(--sage-border);
+  min-height: 0;
+}
+
+.menu-panel-heading {
+  background: #182217;
+  border-bottom: 2px solid var(--sage-border);
+  padding: 14px 22px;
+}
+
+.menu-panel-heading h2 {
+  font-family: var(--font-pricedown);
+  font-size: 2.2rem;
+  letter-spacing: 2px;
+  color: var(--gta-yellow);
+  text-shadow: 2px 2px 0 #000;
+  line-height: 1;
+}
+
+.menu-items-list {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  gap: 4px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.menu-item-row {
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+  cursor: pointer;
+  background: transparent;
+  border-left: 6px solid transparent;
+  transition: background 0.1s ease, border-color 0.1s ease;
+}
+
+.menu-item-arrow {
+  font-family: var(--font-pricedown);
+  font-size: 1.5rem;
+  color: var(--gta-yellow);
+  margin-right: 14px;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: all 0.1s ease;
+}
+
+.menu-item-text {
+  font-family: var(--font-pricedown);
+  font-size: 2.2rem;
+  letter-spacing: 2px;
+  color: var(--gta-offwhite);
+  text-shadow: 2px 2px 0 #000;
+  line-height: 1;
+  transition: color 0.1s ease;
+}
+
+/* Hover & Selected State */
+.menu-item-row:hover,
+.menu-item-row.selected {
+  background: var(--sage-muted);
+  border-left-color: var(--gta-yellow);
+}
+
+.menu-item-row:hover .menu-item-arrow,
+.menu-item-row.selected .menu-item-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.menu-item-row:hover .menu-item-text,
+.menu-item-row.selected .menu-item-text {
+  color: var(--gta-yellow);
+  text-shadow: 2px 2px 0 #000;
+}
+
+/* ==========================================================================
+   RIGHT PANEL: DYNAMIC CONTENT (PHOTO OR SECTIONS)
+   ========================================================================== */
+.right-content-panel {
+  flex: 1;
+  display: flex;
+  background: var(--bg-panel);
+  border: 2px solid var(--sage-border);
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Sub-screen layers */
+.content-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  display: none;
+  padding: 24px 30px 80px 30px;
+  overflow-y: scroll !important;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--sage-border-active) #10150f;
+  box-sizing: border-box;
+}
+
+.content-screen.active {
+  display: block !important;
+}
+
+#screen-home.active {
+  display: flex !important;
+  flex-direction: column;
+  overflow: hidden !important;
+  padding: 0;
+}
+
+.content-screen::-webkit-scrollbar {
+  width: 8px;
+}
+
+.content-screen::-webkit-scrollbar-track {
+  background: #10150f;
+  border-left: 1px solid var(--sage-border);
+}
+
+.content-screen::-webkit-scrollbar-thumb {
+  background: var(--sage-border-active);
+  border-radius: 2px;
+}
+
+.content-screen::-webkit-scrollbar-thumb:hover {
+  background: var(--gta-yellow);
+}
+
+/* ==========================================================================
+   HOME SCREEN: PROPERLY POSITIONED CHARACTER PHOTO + DIPLOMA NAMEPLATE
+   ========================================================================== */
+#screen-home {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background: #121811;
+  overflow: hidden;
+}
+
+.home-art-container {
+  flex: 1;
+  min-height: 0;
+  /* Prevents flexbox child from overflowing container! */
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  /* Rests character on nameplate naturally */
+  position: relative;
+  overflow: hidden;
+  padding: 16px 20px 0 20px;
+}
+
+.home-character-photo {
+  max-height: 100%;
+  max-width: 100%;
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: contrast(1.04) drop-shadow(0 10px 18px rgba(0, 0, 0, 0.7));
+  display: block;
+}
+
+/* The Nameplate with San Andreas Diploma font - Centered */
+.home-nameplate {
+  background: #0f150e;
+  border-top: 2px solid var(--sage-border);
+  padding: 14px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 5;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.home-nameplate-text-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+.home-nameplate-title {
+  font-family: var(--font-logo);
+  font-size: 2.8rem;
+  letter-spacing: 1.5px;
+  color: var(--gta-white);
+  line-height: 1.05;
+  text-shadow: 3px 3px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+  text-align: center;
+}
+
+.home-nameplate-sub {
+  font-family: var(--font-interface);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--gta-yellow);
+  text-transform: uppercase;
+  margin-top: 6px;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   SUB-SCREEN HEADERS
+   ========================================================================== */
+.section-top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--sage-border);
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+  position: sticky;
+  top: -24px;
+  background: var(--bg-panel);
+  z-index: 10;
+  padding-top: 4px;
+}
+
+.section-title-text {
+  font-family: var(--font-pricedown);
+  font-size: 2.6rem;
+  letter-spacing: 2px;
+  color: var(--gta-yellow);
+  text-shadow: 2px 2px 0 #000;
+  line-height: 1;
+}
+
+.btn-back-action {
+  background: var(--sage-muted);
+  border: 1px solid var(--sage-border);
+  color: var(--gta-white);
+  font-family: var(--font-interface);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 6px 16px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-back-action:hover {
+  background: var(--gta-yellow);
+  color: #000;
+  border-color: var(--gta-yellow);
+}
+
+/* ==========================================================================
+   ABOUT SCREEN
+   ========================================================================== */
+.about-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+  padding-bottom: 80px;
+}
+
+.about-intro-box {
+  background: var(--bg-panel-inner);
+  border-left: 4px solid var(--gta-yellow);
+  border-top: 1px solid var(--sage-border);
+  border-right: 1px solid var(--sage-border);
+  border-bottom: 1px solid var(--sage-border);
+  padding: 18px 22px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--gta-white);
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.about-highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.about-stat-card {
+  background: var(--bg-panel-inner);
+  border: 1px solid var(--sage-border);
+  padding: 12px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.about-stat-label {
+  font-family: var(--font-interface);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--gta-gray);
+  text-transform: uppercase;
+}
+
+.about-stat-val {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--gta-yellow);
+  word-break: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.4;
+}
+
+.about-body-text {
+  background: var(--bg-panel-inner);
+  border: 1px solid var(--sage-border);
+  padding: 18px 22px;
+  font-size: 0.96rem;
+  line-height: 1.65;
+  color: var(--gta-offwhite);
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.about-body-text p+p {
+  margin-top: 10px;
+}
+
+/* ==========================================================================
+   EDUCATION SCREEN
+   ========================================================================== */
+.edu-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 60px;
+}
+
+.edu-item-box {
+  background: var(--bg-panel-inner);
+  border: 1px solid var(--sage-border);
+  padding: 20px 24px;
+  position: relative;
+  transition: border-color 0.15s ease;
+}
+
+.edu-item-box:hover {
+  border-color: var(--gta-yellow);
+}
+
+.edu-badges-group {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.edu-badge-score {
+  border: 1px solid var(--gta-yellow);
+  color: var(--gta-yellow);
+  background: rgba(248, 194, 0, 0.12);
+  font-family: var(--font-interface);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  padding: 3px 10px;
+  text-transform: uppercase;
+}
+
+.edu-badge-status {
+  border: 1px solid var(--sage-highlight);
+  color: var(--sage-highlight);
+  font-family: var(--font-interface);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 3px 10px;
+  text-transform: uppercase;
+}
+
+.edu-meta-score {
+  color: var(--gta-yellow);
+  font-weight: 700;
+}
+
+.edu-item-inst {
+  font-family: var(--font-pricedown);
+  font-size: 1.9rem;
+  letter-spacing: 1.5px;
+  color: var(--gta-white);
+  line-height: 1.1;
+}
+
+.edu-item-degree {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--gta-yellow);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.edu-item-meta {
+  display: flex;
+  gap: 18px;
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--gta-gray);
+}
+
+.edu-item-bullets {
+  margin-top: 12px;
+  padding-left: 18px;
+  font-size: 0.92rem;
+  color: var(--gta-offwhite);
+  line-height: 1.55;
+}
+
+/* ==========================================================================
+   SKILLS SCREEN (PROFESSIONAL STAT BARS)
+   ========================================================================== */
+.skills-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.skill-group {
+  background: var(--bg-panel-inner);
+  border: 1px solid var(--sage-border);
+  padding: 18px 22px;
+}
+
+.skill-group-title {
+  font-family: var(--font-interface);
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--gta-white);
+  border-bottom: 1px solid var(--sage-border);
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.skill-rows-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px 26px;
+}
+
+.skill-unit {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.skill-unit-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.skill-unit-name {
+  color: var(--gta-offwhite);
+}
+
+.skill-unit-score {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--gta-yellow);
+}
+
+.skill-bar-track {
+  width: 100%;
+  height: 9px;
+  background: #090c09;
+  border: 1px solid var(--sage-border);
+  overflow: hidden;
+}
+
+.skill-bar-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--sage-highlight), var(--gta-yellow));
+  transition: width 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ==========================================================================
+   PROJECTS SCREEN (MISSION CARDS & STAMPS)
+   ========================================================================== */
+.projects-deck {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 18px;
+}
+
+.mission-panel {
+  background: var(--bg-panel-inner);
+  border: 2px solid var(--sage-border);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: border-color 0.15s ease;
+}
+
+.mission-panel:hover {
+  border-color: var(--gta-yellow);
+}
+
+.mission-panel.featured {
+  border-color: var(--gta-gold);
+  background: #1d281c;
+  grid-column: 1 / -1;
+}
+
+.mission-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.mission-cat-tag {
+  font-family: var(--font-interface);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--gta-yellow);
+  text-transform: uppercase;
+}
+
+.mission-heading {
+  font-family: var(--font-pricedown);
+  font-size: 2.1rem;
+  letter-spacing: 1.5px;
+  color: var(--gta-white);
+  line-height: 1.1;
+  margin-top: 2px;
+}
+
+/* Mission Passed Stamp */
+.mission-passed-label {
+  font-family: var(--font-pricedown);
+  font-size: 1.35rem;
+  letter-spacing: 1.5px;
+  color: var(--gta-green);
+  border: 2px solid var(--gta-green);
+  padding: 3px 10px;
+  transform: rotate(-3deg);
+  white-space: nowrap;
+  text-shadow: 1px 1px 0 #000;
+}
+
+.mission-info-text {
+  font-size: 0.94rem;
+  color: var(--gta-offwhite);
+  line-height: 1.55;
+  margin: 8px 0 12px 0;
+}
+
+.mission-bullet-points {
+  padding-left: 18px;
+  font-size: 0.88rem;
+  color: var(--gta-gray);
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.mission-tags-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+  margin-bottom: 14px;
+}
+
+.mission-tag-pill {
+  background: var(--sage-muted);
+  border: 1px solid var(--sage-border);
+  color: var(--gta-offwhite);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  padding: 3px 8px;
+}
+
+.mission-actions-bar {
+  display: flex;
+  gap: 10px;
+  border-top: 1px solid var(--sage-border);
+  padding-top: 12px;
+}
+
+.btn-mission-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sage-muted);
+  border: 1px solid var(--sage-border);
+  color: var(--gta-white);
+  font-family: var(--font-interface);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 6px 14px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-mission-link:hover {
+  background: var(--gta-yellow);
+  color: #000;
+  border-color: var(--gta-yellow);
+}
+
+/* ==========================================================================
+   INTERNSHIP SCREEN
+   ========================================================================== */
+.internship-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.intern-card {
+  background: var(--bg-panel-inner);
+  border: 2px solid var(--sage-border);
+  padding: 24px;
+  position: relative;
+}
+
+.intern-status-pill {
+  position: absolute;
+  top: 20px;
+  right: 22px;
+  border: 1px solid var(--gta-yellow);
+  color: var(--gta-yellow);
+  font-family: var(--font-interface);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 3px 10px;
+  text-transform: uppercase;
+}
+
+.intern-company-name {
+  font-family: var(--font-pricedown);
+  font-size: 2.3rem;
+  letter-spacing: 1.5px;
+  color: var(--gta-white);
+  line-height: 1;
+}
+
+.intern-role-title {
+  font-size: 1.1rem;
+  color: var(--gta-yellow);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.intern-meta-details {
+  display: flex;
+  gap: 18px;
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--gta-gray);
+}
+
+.intern-body-desc {
+  margin-top: 14px;
+  font-size: 0.96rem;
+  line-height: 1.6;
+  color: var(--gta-offwhite);
+}
+
+.intern-points {
+  margin-top: 12px;
+  padding-left: 20px;
+  font-size: 0.92rem;
+  color: var(--gta-gray);
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   CONTACT SCREEN
+   ========================================================================== */
+.contact-screen-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 600px;
+}
+
+.contact-msg-box {
+  background: var(--bg-panel-inner);
+  border: 1px solid var(--sage-border);
+  padding: 18px 22px;
+  color: var(--gta-offwhite);
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.contact-links-deck {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-entry-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--bg-panel-inner);
+  border: 1px solid var(--sage-border);
+  padding: 14px 20px;
+  text-decoration: none;
+  color: var(--gta-white);
+  transition: all 0.15s ease;
+}
+
+.contact-entry-row:hover {
+  background: var(--sage-muted);
+  border-color: var(--gta-yellow);
+  transform: translateX(4px);
+}
+
+.contact-entry-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: var(--gta-yellow);
+  flex-shrink: 0;
+}
+
+.contact-svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  display: block;
+}
+
+.contact-entry-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-entry-label {
+  font-family: var(--font-interface);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--gta-yellow);
+  text-transform: uppercase;
+}
+
+.contact-entry-val {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--gta-offwhite);
+}
+
+/* ==========================================================================
+   FOOTER (CONTROLLER HINTS)
+   ========================================================================== */
+.menu-footer-bar {
+  height: var(--footer-height);
+  background: #10150f;
+  border-top: 2px solid var(--sage-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 32px;
+  font-family: var(--font-interface);
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+  z-index: 10;
+}
+
+.footer-prompt-cluster {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.prompt-unit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--gta-gray);
+  cursor: pointer;
+  transition: color 0.12s ease;
+}
+
+.prompt-unit:hover {
+  color: var(--gta-yellow);
+}
+
+.key-tag {
+  background: var(--sage-muted);
+  border: 1px solid var(--sage-border);
+  color: var(--gta-yellow);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 2px 7px;
+}
+
+.footer-signature {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--gta-dim);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (MOBILE & TABLET)
+   ========================================================================== */
+@media (max-width: 900px) {
+  .menu-main-body {
+    flex-direction: column;
+    padding: 14px;
+    gap: 14px;
+    overflow-y: auto;
+  }
+
+  .left-menu-panel {
+    flex: 0 0 auto;
+  }
+
+  .menu-items-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 8px;
+    gap: 6px;
+  }
+
+  .menu-item-row {
+    padding: 8px 14px;
+    border-left: none;
+    border-bottom: 3px solid transparent;
+  }
+
+  .menu-item-row.selected {
+    border-left: none;
+    border-bottom-color: var(--gta-yellow);
+  }
+
+  .menu-item-text {
+    font-size: 1.6rem;
+  }
+
+  .right-content-panel {
+    min-height: 480px;
+  }
+
+  .home-character-photo {
+    max-height: 300px;
+  }
+
+  .home-nameplate-title {
+    font-size: 2.2rem;
+  }
+
+  .splash-name-diploma {
+    font-size: 3rem;
+  }
+}

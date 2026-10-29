@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Allen Christopher Raj D | Personal Portfolio</title>
+  <meta name="description"
+    content="GTA San Andreas pause-menu portfolio for Allen Christopher Raj D, Cyber Security student and developer.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%2310150f'/><rect x='6' y='6' width='88' height='88' rx='14' fill='none' stroke='%23f8c200' stroke-width='6'/><text x='50' y='72' font-family='Impact, sans-serif' font-size='62' font-weight='900' fill='%23f8c200' text-anchor='middle'>A</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- START / LOADING SCREEN -->
+  <div id="splash-screen">
+    <div class="splash-box">
+      <h1 class="splash-name-diploma">Allen Christopher Raj D</h1>
+      <div class="splash-subtitle">Aspiring AI Security Engineer & Ethical Hacker</div>
+
+      <!-- Clean Auto-Loading Progress Bar -->
+      <div class="splash-loader-wrap">
+        <div class="splash-loader-bar">
+          <div class="splash-loader-fill" id="splash-loader-fill"></div>
+        </div>
+        <div class="splash-loader-text">
+          <span id="splash-loader-status">LOADING ...</span>
+          <span id="splash-loader-percent">0%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN MENU APP -->
+  <div id="pause-menu-app">
+
+    <!-- TOP BAR (CLEAN & PROFESSIONAL) -->
+    <header class="menu-top-bar">
+      <div class="top-bar-center">
+        <div class="top-bar-name">WELCOME! Dive right in</div>
+      </div>
+    </header>
+
+    <!-- MAIN BODY: LEFT MENU & RIGHT CONTENT -->
+    <main class="menu-main-body">
+
+      <!-- LEFT PANEL: Vertical Menu -->
+      <nav class="left-menu-panel">
+        <div class="menu-panel-heading">
+          <h2>MENU</h2>
+        </div>
+        <div class="menu-items-list" id="menu-items-list">
+          <!-- Dynamically populated from portfolio-data.js -->
+        </div>
+      </nav>
+
+      <!-- RIGHT PANEL: Character Photo or Selected Section -->
+      <section class="right-content-panel">
+
+        <!-- 1. HOME SCREEN (Properly Framed Character Photo on Right + Diploma Nameplate) -->
+        <div class="content-screen active" id="screen-home">
+          <div class="home-art-container">
+            <img id="home-character-img" src="Stylized Comic Portrait on Transparent Background.png"
+              alt="Allen Christopher Raj D Portrait" class="home-character-photo" />
+          </div>
+          <div class="home-nameplate">
+            <div class="home-nameplate-text-group">
+              <div class="home-nameplate-title" id="home-name-display">Allen Christopher Raj D</div>
+              <div class="home-nameplate-sub" id="home-title-display">Aspiring AI Security Engineer & Ethical Hacker
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. ABOUT SCREEN -->
+        <div class="content-screen" id="screen-about">
+          <div class="section-top-header">
+            <h3 class="section-title-text">ABOUT</h3>
+            <button class="btn-back-action" data-back>BACK [ESC]</button>
+          </div>
+          <div class="about-wrap" id="about-wrap"></div>
+        </div>
+
+        <!-- 3. EDUCATION SCREEN -->
+        <div class="content-screen" id="screen-education">
+          <div class="section-top-header">
+            <h3 class="section-title-text">EDUCATION</h3>
+            <button class="btn-back-action" data-back>BACK [ESC]</button>
+          </div>
+          <div class="edu-cards-list" id="education-wrap"></div>
+        </div>
+
+        <!-- 4. SKILLS SCREEN -->
+        <div class="content-screen" id="screen-skills">
+          <div class="section-top-header">
+            <h3 class="section-title-text">SKILLS</h3>
+            <button class="btn-back-action" data-back>BACK [ESC]</button>
+          </div>
+          <div class="skills-wrapper" id="skills-wrap"></div>
+        </div>
+
+        <!-- 5. PROJECTS SCREEN (MISSIONS) -->
+        <div class="content-screen" id="screen-projects">
+          <div class="section-top-header">
+            <h3 class="section-title-text">PROJECTS</h3>
+            <button class="btn-back-action" data-back>BACK [ESC]</button>
+          </div>
+          <div class="projects-deck" id="projects-wrap"></div>
+        </div>
+
+        <!-- 6. INTERNSHIP SCREEN -->
+        <div class="content-screen" id="screen-internship">
+          <div class="section-top-header">
+            <h3 class="section-title-text">INTERNSHIP</h3>
+            <button class="btn-back-action" data-back>BACK [ESC]</button>
+          </div>
+          <div class="internship-list" id="internship-wrap"></div>
+        </div>
+
+        <!-- 7. CONTACT SCREEN -->
+        <div class="content-screen" id="screen-contact">
+          <div class="section-top-header">
+            <h3 class="section-title-text">CONTACT</h3>
+            <button class="btn-back-action" data-back>BACK [ESC]</button>
+          </div>
+          <div class="contact-screen-layout" id="contact-wrap"></div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- FOOTER: CONTROLLER PROMPTS (WITHOUT AUDIO PROMPTS) -->
+    <footer class="menu-footer-bar">
+      <div class="footer-prompt-cluster">
+        <div class="prompt-unit" id="prompt-nav">
+          <span class="key-tag">↑ / ↓</span>
+          <span>SELECT</span>
+        </div>
+        <div class="prompt-unit" id="prompt-enter">
+          <span class="key-tag">ENTER</span>
+          <span>CONFIRM</span>
+        </div>
+        <div class="prompt-unit" id="prompt-back">
+          <span class="key-tag">ESC</span>
+          <span>BACK</span>
+        </div>
+      </div>
+
+      <div class="footer-signature">
+        ALLEN CHRISTOPHER RAJ D · PORTFOLIO
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="portfolio-data.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
