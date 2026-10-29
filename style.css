@@ -1075,55 +1075,460 @@ body {
 }
 
 /* ==========================================================================
-   RESPONSIVE DESIGN (MOBILE & TABLET)
+   RESPONSIVE DESIGN — TABLET (≤ 900px)
    ========================================================================== */
 @media (max-width: 900px) {
-  .menu-main-body {
-    flex-direction: column;
-    padding: 14px;
-    gap: 14px;
-    overflow-y: auto;
+  :root {
+    --header-height: 46px;
+    --footer-height: 40px;
   }
 
+  /* Stack left menu above right content */
+  .menu-main-body {
+    flex-direction: column;
+    padding: 10px 12px;
+    gap: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* Left panel: horizontal scrollable tab strip */
   .left-menu-panel {
     flex: 0 0 auto;
+    width: 100%;
+    border-right: none;
+    border-bottom: 2px solid var(--sage-border);
+  }
+
+  .menu-panel-heading {
+    padding: 10px 16px;
+  }
+
+  .menu-panel-heading h2 {
+    font-size: 1.6rem;
   }
 
   .menu-items-list {
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 8px;
-    gap: 6px;
+    padding: 6px 8px;
+    gap: 4px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .menu-items-list::-webkit-scrollbar {
+    display: none;
   }
 
   .menu-item-row {
-    padding: 8px 14px;
+    flex: 0 0 auto;
+    padding: 10px 16px;
     border-left: none;
     border-bottom: 3px solid transparent;
+    min-height: 44px; /* touch target */
   }
 
-  .menu-item-row.selected {
+  .menu-item-row.selected,
+  .menu-item-row:hover {
     border-left: none;
     border-bottom-color: var(--gta-yellow);
+    background: var(--sage-muted);
+  }
+
+  .menu-item-arrow {
+    display: none; /* hide arrow in horizontal mode */
   }
 
   .menu-item-text {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
   }
 
+  /* Right content panel fills remaining space */
   .right-content-panel {
-    min-height: 480px;
+    flex: 1;
+    min-height: 380px;
+    max-height: 60vh;
   }
 
+  /* Section content padding */
+  .content-screen {
+    padding: 16px 18px 60px 18px;
+  }
+
+  /* Section headers */
+  .section-title-text {
+    font-size: 2rem;
+  }
+
+  .btn-back-action {
+    font-size: 0.82rem;
+    padding: 5px 12px;
+  }
+
+  /* Home character photo */
   .home-character-photo {
-    max-height: 300px;
+    max-height: 260px;
+    width: auto;
   }
 
   .home-nameplate-title {
-    font-size: 2.2rem;
+    font-size: 2rem;
+  }
+
+  .home-nameplate-sub {
+    font-size: 0.82rem;
+    letter-spacing: 1.5px;
+  }
+
+  /* Education */
+  .edu-badges-group {
+    position: static;
+    margin-bottom: 8px;
+  }
+
+  .edu-item-inst {
+    font-size: 1.5rem;
+  }
+
+  /* Projects */
+  .projects-deck {
+    grid-template-columns: 1fr;
+  }
+
+  .mission-panel.featured {
+    grid-column: 1;
+  }
+
+  /* Skills grid */
+  .skill-rows-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Splash */
+  .splash-name-diploma {
+    font-size: 2.8rem;
+  }
+
+  .splash-subtitle {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+  }
+
+  /* Footer */
+  .menu-footer-bar {
+    padding: 0 16px;
+    gap: 8px;
+  }
+
+  .footer-prompt-cluster {
+    gap: 14px;
+  }
+
+  .footer-signature {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN — MOBILE (≤ 600px)
+   ========================================================================== */
+@media (max-width: 600px) {
+  :root {
+    --header-height: 40px;
+    --footer-height: 38px;
+  }
+
+  /* Top bar */
+  .top-bar-name {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+  }
+
+  /* Main body */
+  .menu-main-body {
+    padding: 8px;
+    gap: 8px;
+  }
+
+  /* Left panel even more compact */
+  .menu-panel-heading h2 {
+    font-size: 1.3rem;
+  }
+
+  .menu-item-text {
+    font-size: 1.15rem;
+    letter-spacing: 0.5px;
+  }
+
+  .menu-item-row {
+    padding: 9px 12px;
+  }
+
+  /* Right content panel */
+  .right-content-panel {
+    min-height: 320px;
+    max-height: 58vh;
+  }
+
+  .content-screen {
+    padding: 14px 14px 56px 14px;
+  }
+
+  /* Section header */
+  .section-top-header {
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+  }
+
+  .section-title-text {
+    font-size: 1.7rem;
+  }
+
+  .btn-back-action {
+    font-size: 0.75rem;
+    padding: 5px 10px;
+    letter-spacing: 1px;
+  }
+
+  /* Home nameplate */
+  .home-nameplate {
+    padding: 10px 12px;
+  }
+
+  .home-nameplate-title {
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+  }
+
+  .home-nameplate-sub {
+    font-size: 0.74rem;
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+
+  .home-art-container {
+    padding: 10px 10px 0 10px;
+  }
+
+  .home-character-photo {
+    max-height: 220px;
+  }
+
+  /* About */
+  .about-intro-box {
+    font-size: 0.92rem;
+    padding: 14px 16px;
+  }
+
+  .about-highlights-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-stat-card {
+    padding: 10px 14px;
+  }
+
+  .about-body-text {
+    font-size: 0.88rem;
+    padding: 14px 16px;
+  }
+
+  /* Education */
+  .edu-item-inst {
+    font-size: 1.3rem;
+  }
+
+  .edu-item-degree {
+    font-size: 0.95rem;
+  }
+
+  .edu-item-meta {
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.78rem;
+  }
+
+  .edu-item-box {
+    padding: 14px 16px;
+  }
+
+  .edu-badges-group {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  /* Skills */
+  .skill-group {
+    padding: 14px 16px;
+  }
+
+  .skill-group-title {
+    font-size: 1rem;
+  }
+
+  /* Projects */
+  .mission-heading {
+    font-size: 1.6rem;
+  }
+
+  .mission-panel {
+    padding: 16px;
+  }
+
+  .mission-passed-label {
+    font-size: 1rem;
+  }
+
+  .mission-actions-bar {
+    flex-wrap: wrap;
+  }
+
+  /* Internship */
+  .intern-company-name {
+    font-size: 1.7rem;
+  }
+
+  .intern-card {
+    padding: 16px;
+  }
+
+  .intern-status-pill {
+    position: static;
+    display: inline-block;
+    margin-bottom: 8px;
+    font-size: 0.75rem;
+  }
+
+  .intern-meta-details {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  /* Contact */
+  .contact-screen-layout {
+    max-width: 100%;
+  }
+
+  .contact-entry-row {
+    padding: 12px 14px;
+    gap: 12px;
+  }
+
+  .contact-entry-label {
+    font-size: 0.88rem;
+    letter-spacing: 1px;
+  }
+
+  .contact-entry-val {
+    font-size: 0.78rem;
+    word-break: break-all;
+  }
+
+  /* Splash screen */
+  .splash-name-diploma {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .splash-subtitle {
+    font-size: 0.8rem;
+    letter-spacing: 1.5px;
+    padding: 6px 14px;
+  }
+
+  .splash-loader-wrap {
+    max-width: 100%;
+  }
+
+  /* Footer */
+  .menu-footer-bar {
+    padding: 0 12px;
+  }
+
+  .footer-prompt-cluster {
+    gap: 10px;
+  }
+
+  .prompt-unit {
+    font-size: 0.75rem;
+    gap: 5px;
+  }
+
+  .key-tag {
+    font-size: 0.65rem;
+    padding: 1px 5px;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN — TINY PHONES (≤ 380px)
+   ========================================================================== */
+@media (max-width: 380px) {
+  .menu-item-text {
+    font-size: 0.95rem;
+  }
+
+  .home-nameplate-title {
+    font-size: 1.3rem;
+  }
+
+  .home-character-photo {
+    max-height: 180px;
+  }
+
+  .section-title-text {
+    font-size: 1.4rem;
   }
 
   .splash-name-diploma {
-    font-size: 3rem;
+    font-size: 1.6rem;
+  }
+
+  /* Stack footer items */
+  .footer-prompt-cluster {
+    gap: 8px;
+  }
+
+  .prompt-unit span:last-child {
+    display: none; /* hide label text, keep key tags only */
+  }
+}
+
+/* ==========================================================================
+   TOUCH DEVICE ENHANCEMENTS
+   ========================================================================== */
+@media (hover: none) and (pointer: coarse) {
+  /* Larger touch targets */
+  .menu-item-row {
+    min-height: 48px;
+    padding: 12px 16px;
+  }
+
+  .btn-back-action {
+    min-height: 40px;
+    padding: 8px 16px;
+  }
+
+  .btn-mission-link {
+    min-height: 40px;
+    padding: 10px 18px;
+  }
+
+  .contact-entry-row {
+    min-height: 56px;
+  }
+
+  /* Disable hover transform on touch (avoids sticky states) */
+  .contact-entry-row:hover {
+    transform: none;
+  }
+
+  /* Always show scrollbar on touch for discoverability */
+  .content-screen {
+    scrollbar-width: auto;
   }
 }
