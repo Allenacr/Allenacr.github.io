@@ -19,9 +19,6 @@ A portfolio for **Allen Christopher Raj D**, Aspiring AI Security Engineer & Eth
   - Mouse click and touch friendly.
   - Auto-loading progress intro screen.
 
-## ⚙️ Content Management
-All portfolio content (name, biography, education, skills, projects, and contact info) is easily updated directly inside [`portfolio-data.js`](portfolio-data.js) without needing to touch any HTML or CSS!
-
 Section content wraps to fit narrow screens, and longer sections can be scrolled within the content panel on desktop and mobile.
 
 ## 📦 Tech Stack
