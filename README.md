@@ -13,11 +13,15 @@ A portfolio for **Allen Christopher Raj D**, Aspiring AI Security Engineer & Eth
   - **Skills**: Combat/proficiency attribute bars.
   - **Projects (Missions)**: Mission cards featuring **SecureGuard** and **ARCShield** with "MISSION PASSED" stamps.
   - **Internship**: Professional experience at MindFul AI.
+  - **Certifications**: Credential cards with verification links.
   - **Contact**: Direct links to Email, LinkedIn, and GitHub with official vector logos.
 - **Navigation**:
   - Full keyboard navigation (<kbd>↑</kbd> / <kbd>↓</kbd> or <kbd>W</kbd> / <kbd>S</kbd> to select, <kbd>Enter</kbd> to confirm, <kbd>Esc</kbd> to return).
   - Mouse click and touch friendly.
   - Auto-loading progress intro screen.
+
+## ⚙️ Content Management
+All portfolio content (name, biography, education, skills, projects, internship, certifications, and contact info) is easily updated directly inside [`portfolio-data.js`](portfolio-data.js) without needing to touch any HTML or CSS. Replace the seven certification placeholders with each certification name, issuer, and verification URL.
 
 Section content wraps to fit narrow screens, and longer sections can be scrolled within the content panel on desktop and mobile.
 

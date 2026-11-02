@@ -19,6 +19,7 @@ const PORTFOLIO_DATA = {
     { id: "skills", label: "SKILLS" },
     { id: "projects", label: "PROJECTS" },
     { id: "internship", label: "INTERNSHIP" },
+    { id: "certifications", label: "CERTIFICATIONS" },
     { id: "contact", label: "CONTACT" }
   ],
 
@@ -149,6 +150,47 @@ const PORTFOLIO_DATA = {
           "Documented security testing procedures and patch recommendations."
         ],
         techUsed: ["Python", "FastAPI", "scikit-learn", "LogisticRegression", "Git", "Linux"]
+      }
+    ]
+  },
+
+  certifications: {
+    title: "CERTIFICATIONS",
+    items: [
+      {
+        name: "Ethical Hacker",
+        issuer: "Cisco Networking Academy",
+        verifyUrl: "https://www.credly.com/badges/676bb9d7-ba9b-4400-9d97-90430e518c37/linked_in_profile"
+      },
+      {
+        name: "AI Security",
+        issuer: "TryHackMe",
+        verifyUrl: "https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-KM2FORIIES.pdf"
+      },
+      {
+        name: "Data Science Essentials With Python",
+        issuer: "Cisco Networking Academy",
+        verifyUrl: "https://www.credly.com/badges/bbe3a905-fca6-4cd4-a443-3cd14f7ff27d/linked_in_profile"
+      },
+      {
+        name: "CCNA",
+        issuer: "Cisco Networking Academy",
+        verifyUrl: "https://www.credly.com/badges/516b87e4-7872-4321-abda-83cabdf77459/linked_in_profile"
+      },
+      {
+        name: "Linux Essentials",
+        issuer: "Cisco Networking Academy",
+        verifyUrl: "https://www.credly.com/badges/f1f71c50-75c8-4795-ac01-83b9a30b3203/linked_in_profile"
+      },
+      {
+        name: "Python Programming",
+        issuer: "SkillRack",
+        verifyUrl: "https://www.SkillRack.com/cert/630266/GBP"
+      },
+      {
+        name: "Web Development",
+        issuer: "G-Tec Computer Education",
+        verifyUrl: "http://www.gtecadmin.com/validation/index.aspx"
       }
     ]
   },
