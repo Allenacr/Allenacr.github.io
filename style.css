@@ -71,6 +71,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  min-width: 0;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -126,6 +127,8 @@ body {
   text-shadow: 3px 3px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
   line-height: 1.1;
   margin-bottom: 12px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .splash-subtitle {
@@ -139,6 +142,8 @@ body {
   border-bottom: 2px solid var(--sage-border);
   padding: 8px 24px;
   margin-bottom: 36px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 /* Auto-loading progress bar */
@@ -184,6 +189,7 @@ body {
   flex-direction: column;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   position: relative;
   background: var(--bg-main);
 }
@@ -219,6 +225,7 @@ body {
   color: var(--gta-white);
   text-transform: uppercase;
   text-align: center;
+  overflow-wrap: anywhere;
 }
 
 /* ==========================================================================
@@ -231,18 +238,20 @@ body {
   padding: 18px 32px;
   gap: 26px;
   min-height: 0;
+  min-width: 0;
 }
 
 /* ==========================================================================
    LEFT PANEL: THE VERTICAL PAUSE MENU
    ========================================================================== */
 .left-menu-panel {
-  flex: 0 0 360px;
+  flex: 0 1 clamp(220px, 28vw, 360px);
   display: flex;
   flex-direction: column;
   background: var(--bg-panel);
   border: 2px solid var(--sage-border);
   min-height: 0;
+  min-width: 0;
 }
 
 .menu-panel-heading {
@@ -258,6 +267,7 @@ body {
   color: var(--gta-yellow);
   text-shadow: 2px 2px 0 #000;
   line-height: 1;
+  overflow-wrap: anywhere;
 }
 
 .menu-items-list {
@@ -277,6 +287,7 @@ body {
   background: transparent;
   border-left: 6px solid transparent;
   transition: background 0.1s ease, border-color 0.1s ease;
+  min-width: 0;
 }
 
 .menu-item-arrow {
@@ -297,22 +308,23 @@ body {
   text-shadow: 2px 2px 0 #000;
   line-height: 1;
   transition: color 0.1s ease;
+  overflow-wrap: anywhere;
 }
 
 /* Hover & Selected State */
-.menu-item-row:hover,
+.menu-hover-enabled .menu-item-row:hover,
 .menu-item-row.selected {
   background: var(--sage-muted);
   border-left-color: var(--gta-yellow);
 }
 
-.menu-item-row:hover .menu-item-arrow,
+.menu-hover-enabled .menu-item-row:hover .menu-item-arrow,
 .menu-item-row.selected .menu-item-arrow {
   opacity: 1;
   transform: translateX(0);
 }
 
-.menu-item-row:hover .menu-item-text,
+.menu-hover-enabled .menu-item-row:hover .menu-item-text,
 .menu-item-row.selected .menu-item-text {
   color: var(--gta-yellow);
   text-shadow: 2px 2px 0 #000;
@@ -322,13 +334,14 @@ body {
    RIGHT PANEL: DYNAMIC CONTENT (PHOTO OR SECTIONS)
    ========================================================================== */
 .right-content-panel {
-  flex: 1;
+  flex: 1 1 0;
   display: flex;
   background: var(--bg-panel);
   border: 2px solid var(--sage-border);
   position: relative;
   overflow: hidden;
   min-height: 0;
+  min-width: 0;
 }
 
 /* Sub-screen layers */
@@ -345,6 +358,8 @@ body {
   padding: 24px 30px 80px 30px;
   overflow-y: scroll !important;
   overflow-x: hidden;
+  overflow-wrap: anywhere;
+  overscroll-behavior: contain;
   scrollbar-width: thin;
   scrollbar-color: var(--sage-border-active) #10150f;
   box-sizing: border-box;
@@ -447,6 +462,7 @@ body {
   line-height: 1.05;
   text-shadow: 3px 3px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
   text-align: center;
+  overflow-wrap: anywhere;
 }
 
 .home-nameplate-sub {
@@ -459,6 +475,7 @@ body {
   margin-top: 6px;
   text-align: center;
   line-height: 1.4;
+  overflow-wrap: anywhere;
 }
 
 /* ==========================================================================
@@ -477,6 +494,7 @@ body {
   background: var(--bg-panel);
   z-index: 10;
   padding-top: 4px;
+  gap: 12px;
 }
 
 .section-title-text {
@@ -534,7 +552,7 @@ body {
 
 .about-highlights-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
   gap: 12px;
 }
 
@@ -597,6 +615,7 @@ body {
   padding: 20px 24px;
   position: relative;
   transition: border-color 0.15s ease;
+  min-width: 0;
 }
 
 .edu-item-box:hover {
@@ -604,12 +623,11 @@ body {
 }
 
 .edu-badges-group {
-  position: absolute;
-  top: 18px;
-  right: 20px;
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 .edu-badge-score {
@@ -646,6 +664,7 @@ body {
   letter-spacing: 1.5px;
   color: var(--gta-white);
   line-height: 1.1;
+  overflow-wrap: anywhere;
 }
 
 .edu-item-degree {
@@ -654,10 +673,12 @@ body {
   color: var(--gta-yellow);
   font-weight: 600;
   margin-top: 4px;
+  overflow-wrap: anywhere;
 }
 
 .edu-item-meta {
   display: flex;
+  flex-wrap: wrap;
   gap: 18px;
   margin-top: 6px;
   font-family: var(--font-mono);
@@ -702,7 +723,7 @@ body {
 
 .skill-rows-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: 14px 26px;
 }
 
@@ -715,18 +736,25 @@ body {
 .skill-unit-header {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
   font-size: 0.92rem;
   font-weight: 600;
 }
 
 .skill-unit-name {
+  flex: 1 1 0;
+  min-width: 0;
   color: var(--gta-offwhite);
+  overflow-wrap: anywhere;
 }
 
 .skill-unit-score {
+  flex: 0 0 auto;
   font-family: var(--font-mono);
   font-size: 0.82rem;
   color: var(--gta-yellow);
+  white-space: nowrap;
 }
 
 .skill-bar-track {
@@ -749,7 +777,7 @@ body {
    ========================================================================== */
 .projects-deck {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: 18px;
 }
 
@@ -775,9 +803,16 @@ body {
 
 .mission-top-row {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
+  gap: 10px;
   margin-bottom: 8px;
+}
+
+.mission-top-row > div:first-child {
+  flex: 1 1 12rem;
+  min-width: 0;
 }
 
 .mission-cat-tag {
@@ -807,7 +842,9 @@ body {
   border: 2px solid var(--gta-green);
   padding: 3px 10px;
   transform: rotate(-3deg);
-  white-space: nowrap;
+  max-width: 100%;
+  text-align: center;
+  overflow-wrap: anywhere;
   text-shadow: 1px 1px 0 #000;
 }
 
@@ -890,9 +927,6 @@ body {
 }
 
 .intern-status-pill {
-  position: absolute;
-  top: 20px;
-  right: 22px;
   border: 1px solid var(--gta-yellow);
   color: var(--gta-yellow);
   font-family: var(--font-interface);
@@ -901,6 +935,10 @@ body {
   letter-spacing: 1.5px;
   padding: 3px 10px;
   text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 10px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .intern-company-name {
@@ -909,6 +947,7 @@ body {
   letter-spacing: 1.5px;
   color: var(--gta-white);
   line-height: 1;
+  overflow-wrap: anywhere;
 }
 
 .intern-role-title {
@@ -920,6 +959,7 @@ body {
 
 .intern-meta-details {
   display: flex;
+  flex-wrap: wrap;
   gap: 18px;
   margin-top: 6px;
   font-family: var(--font-mono);
@@ -1005,6 +1045,7 @@ body {
 .contact-entry-content {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .contact-entry-label {
@@ -1020,6 +1061,7 @@ body {
   font-family: var(--font-mono);
   font-size: 0.85rem;
   color: var(--gta-offwhite);
+  overflow-wrap: anywhere;
 }
 
 /* ==========================================================================
@@ -1088,8 +1130,7 @@ body {
     flex-direction: column;
     padding: 10px 12px;
     gap: 10px;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
   }
 
   /* Left panel: horizontal scrollable tab strip */
@@ -1110,7 +1151,7 @@ body {
 
   .menu-items-list {
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     padding: 6px 8px;
     gap: 4px;
     overflow-x: auto;
@@ -1132,7 +1173,7 @@ body {
   }
 
   .menu-item-row.selected,
-  .menu-item-row:hover {
+  .menu-hover-enabled .menu-item-row:hover {
     border-left: none;
     border-bottom-color: var(--gta-yellow);
     background: var(--sage-muted);
@@ -1149,9 +1190,9 @@ body {
 
   /* Right content panel fills remaining space */
   .right-content-panel {
-    flex: 1;
-    min-height: 380px;
-    max-height: 60vh;
+    flex: 1 1 0;
+    min-height: 0;
+    max-height: none;
   }
 
   /* Section content padding */
@@ -1185,11 +1226,6 @@ body {
   }
 
   /* Education */
-  .edu-badges-group {
-    position: static;
-    margin-bottom: 8px;
-  }
-
   .edu-item-inst {
     font-size: 1.5rem;
   }
@@ -1270,8 +1306,8 @@ body {
 
   /* Right content panel */
   .right-content-panel {
-    min-height: 320px;
-    max-height: 58vh;
+    min-height: 0;
+    max-height: none;
   }
 
   .content-screen {
@@ -1315,7 +1351,7 @@ body {
   }
 
   .home-character-photo {
-    max-height: 220px;
+    max-height: 100%;
   }
 
   /* About */
@@ -1397,9 +1433,6 @@ body {
   }
 
   .intern-status-pill {
-    position: static;
-    display: inline-block;
-    margin-bottom: 8px;
     font-size: 0.75rem;
   }
 
@@ -1425,7 +1458,7 @@ body {
 
   .contact-entry-val {
     font-size: 0.78rem;
-    word-break: break-all;
+    overflow-wrap: anywhere;
   }
 
   /* Splash screen */
@@ -1474,10 +1507,6 @@ body {
 
   .home-nameplate-title {
     font-size: 1.3rem;
-  }
-
-  .home-character-photo {
-    max-height: 180px;
   }
 
   .section-title-text {
@@ -1530,5 +1559,17 @@ body {
   /* Always show scrollbar on touch for discoverability */
   .content-screen {
     scrollbar-width: auto;
+  }
+}
+
+@media (max-height: 520px) and (max-width: 900px) {
+  .menu-panel-heading {
+    display: none;
+  }
+
+  .menu-item-row {
+    min-height: 38px;
+    padding-top: 6px;
+    padding-bottom: 6px;
   }
 }

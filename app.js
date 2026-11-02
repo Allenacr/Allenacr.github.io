@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // State
   let currentScreen = "home";
-  let selectedIndex = 0;
+  let selectedIndex = -1;
   const menuItems = data.menuItems || [];
 
   // Elements
@@ -63,13 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
         <span class="menu-item-text">${item.label}</span>
       `;
 
-      row.addEventListener("mouseenter", () => {
-        if (selectedIndex !== index) {
-          updateSelection(index);
-        }
-      });
-
       row.addEventListener("click", () => {
+        updateSelection(index);
         openSection(item.id);
       });
 
@@ -78,8 +73,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateSelection(newIndex) {
-    if (newIndex < 0) newIndex = menuItems.length - 1;
-    if (newIndex >= menuItems.length) newIndex = 0;
+    if (menuItems.length === 0) return;
+    newIndex = ((newIndex % menuItems.length) + menuItems.length) % menuItems.length;
 
     selectedIndex = newIndex;
     const rows = menuList.querySelectorAll(".menu-item-row");
@@ -323,6 +318,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (homeScreen) homeScreen.classList.add("active");
 
     currentScreen = "home";
+    selectedIndex = -1;
+    menuList.querySelectorAll(".menu-item-row").forEach(row => row.classList.remove("selected"));
+    document.body.classList.remove("menu-hover-enabled");
   }
 
   /* ==========================================================================
@@ -385,6 +383,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   promptBack?.addEventListener("click", () => returnToHome());
+
+  window.addEventListener("pointermove", () => {
+    document.body.classList.add("menu-hover-enabled");
+  });
 
   /* ==========================================================================
      6. AUTO-LOADING SPLASH (NO BUTTON, DIRECT DISPLAY)

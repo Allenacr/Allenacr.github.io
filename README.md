@@ -22,6 +22,8 @@ A portfolio for **Allen Christopher Raj D**, Aspiring AI Security Engineer & Eth
 ## ⚙️ Content Management
 All portfolio content (name, biography, education, skills, projects, and contact info) is easily updated directly inside [`portfolio-data.js`](portfolio-data.js) without needing to touch any HTML or CSS!
 
+Section content wraps to fit narrow screens, and longer sections can be scrolled within the content panel on desktop and mobile.
+
 ## 📦 Tech Stack
 - Vanilla HTML5, CSS3, JavaScript (ES6)
 - Webfont `@font-face` (Pricedown, Diploma, Beckett)
